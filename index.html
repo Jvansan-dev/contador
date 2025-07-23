@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo de Namoro</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    #countup {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #e63946;
+    }
+
+    .label {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Estamos juntos há...</h1>
+
+  <div id="countup">
+    <div class="box">
+      <div class="number" id="years">0</div>
+      <div class="label">anos</div>
+    </div>
+    <div class="box">
+      <div class="number" id="months">0</div>
+      <div class="label">meses</div>
+    </div>
+    <div class="box">
+      <div class="number" id="days">0</div>
+      <div class="label">dias</div>
+    </div>
+    <div class="box">
+      <div class="number" id="hours">0</div>
+      <div class="label">horas</div>
+    </div>
+    <div class="box">
+      <div class="number" id="minutes">0</div>
+      <div class="label">minutos</div>
+    </div>
+    <div class="box">
+      <div class="number" id="seconds">0</div>
+      <div class="label">segundos</div>
+    </div>
+  </div>
+
+  <button onclick="playAudio()" style="margin-top: 30px; padding: 10px 20px; font-size: 1rem;">🔊 Tocar música</button>
+
+  <audio id="bg-music" loop>
+    <source src="i_wanna_be_yours.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById("bg-music");
+      audio.play();
+    }
+  </script>
+
+  <script>
+    const startDate = new Date("2025-01-10T00:00:00");
+
+    function updateCountup() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+      const end = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+      let years = end.getFullYear() - start.getFullYear();
+      let months = end.getMonth() - start.getMonth();
+      let days = end.getDate() - start.getDate();
+
+      if (days < 0) {
+        months--;
+        const lastMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+        days += lastMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      document.getElementById("years").textContent = years;
+      document.getElementById("months").textContent = months;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    updateCountup();
+    setInterval(updateCountup, 1000);
+  </script>
+
+</body>
+
+</html>
