@@ -78,19 +78,29 @@
     </div>
   </div>
 
-  <button onclick="playAudio()" style="margin-top: 30px; padding: 10px 20px; font-size: 1rem;">🔊 Tocar música</button>
+  <button id="music-btn" onclick="toggleMusic()" style="margin-top: 30px; padding: 10px 20px; font-size: 1rem;">
+    🔊 Tocar música
+  </button>
 
   <audio id="bg-music" loop>
     <source src="i_wanna_be_yours.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
   </audio>
 
   <script>
-    function playAudio() {
-      const audio = document.getElementById("bg-music");
-      audio.play();
+    const music = document.getElementById("bg-music");
+    const btn = document.getElementById("music-btn");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        btn.innerText = "⏸️ Pausar música";
+      } else {
+        music.pause();
+        btn.innerText = "🔊 Tocar música";
+      }
     }
   </script>
+
 
   <script>
     const startDate = new Date("2025-01-10T00:00:00");
